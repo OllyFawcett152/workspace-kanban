@@ -1,0 +1,139 @@
+{
+  "name": "workspace-kanban",
+  "displayName": "Workspace Kanban",
+  "description": "A per-workspace kanban board in the activity bar. Cards are saved to .vscode/kanban.json.",
+  "version": "0.4.1",
+  "publisher": "OliverFawcett",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/OllyFawcett152/workspace-kanban.git"
+  },
+  "bugs": {
+    "url": "https://github.com/OllyFawcett152/workspace-kanban/issues"
+  },
+  "homepage": "https://github.com/OllyFawcett152/workspace-kanban#readme",
+  "icon": "icon.png",
+  "galleryBanner": {
+    "color": "#2f3b52",
+    "theme": "dark"
+  },
+  "engines": {
+    "vscode": "^1.80.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "main": "./extension.js",
+  "activationEvents": [
+    "workspaceContains:.vscode/kanban.json"
+  ],
+  "contributes": {
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "kanban",
+          "title": "Kanban",
+          "icon": "media/kanban.png"
+        }
+      ]
+    },
+    "views": {
+      "kanban": [
+        {
+          "type": "webview",
+          "id": "kanban.board",
+          "name": "Board"
+        }
+      ]
+    },
+    "commands": [
+      {
+        "command": "kanban.addProject",
+        "title": "Kanban: Add Project",
+        "icon": "$(add)"
+      },
+      {
+        "command": "kanban.renameProject",
+        "title": "Kanban: Rename Project"
+      },
+      {
+        "command": "kanban.deleteProject",
+        "title": "Kanban: Delete Project"
+      },
+      {
+        "command": "kanban.openPanel",
+        "title": "Kanban: Open Board in Editor",
+        "icon": "$(link-external)"
+      },
+      {
+        "command": "kanban.clear",
+        "title": "Kanban: Clear Board",
+        "icon": "$(clear-all)"
+      }
+    ],
+    "menus": {
+      "view/title": [
+        {
+          "command": "kanban.addProject",
+          "when": "view == kanban.board",
+          "group": "navigation@1"
+        },
+        {
+          "command": "kanban.openPanel",
+          "when": "view == kanban.board",
+          "group": "navigation@2"
+        },
+        {
+          "command": "kanban.renameProject",
+          "when": "view == kanban.board",
+          "group": "projects@1"
+        },
+        {
+          "command": "kanban.deleteProject",
+          "when": "view == kanban.board",
+          "group": "projects@2"
+        },
+        {
+          "command": "kanban.clear",
+          "when": "view == kanban.board",
+          "group": "projects@3"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "Kanban Board",
+      "properties": {
+        "kanban.columns": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": [
+            "To Do",
+            "In Progress",
+            "In Review",
+            "Done"
+          ],
+          "description": "Column names for the board."
+        },
+        "kanban.file": {
+          "type": "string",
+          "default": ".vscode/kanban.json",
+          "description": "Board file path, relative to the first workspace folder."
+        },
+        "kanban.topCount": {
+          "type": "integer",
+          "default": 1,
+          "minimum": 1,
+          "description": "Number of cards shown when a column is in 'top only' mode."
+        }
+      }
+    }
+  },
+  "keywords": [
+    "kanban",
+    "tasks",
+    "board"
+  ]
+}

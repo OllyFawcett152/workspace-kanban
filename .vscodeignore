@@ -1,0 +1,4 @@
+build_vsix.py
+*.vsix
+.vscode/**
+.gitignore
