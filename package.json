@@ -26,6 +26,7 @@
   ],
   "main": "./extension.js",
   "activationEvents": [
+    "onView:kanban.board",
     "workspaceContains:.vscode/kanban.json"
   ],
   "contributes": {
